@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>高雄旅遊網</title>
+    <link
+      rel="shortcut icon"
+      href="https://www.hexschool.com/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="all.css" />
+    <meta name="description" content="六角學院 JavaScript 最終作業" />
+    <meta
+      name="keywords"
+      content="Kalpas Wang, HexSchool, JavaScript, 最終作業"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta property="og:title" content="六角學院 JavaScript 最終作業" />
+    <meta
+      property="og:description"
+      content="由王偉航（Kalpas Wang）所練習的 JavaScript 最終作業"
+    />
+    <meta
+      property="og:url"
+      content="https://kalpaswang.github.io/hexschool-rwd-final/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="images/logo.png" />
+    <meta property="og:image:type" content="png" />
+    <meta property="og:image:width" content="224" />
+    <meta property="og:image:height" content="50" />
+  </head>
+  <body>
+    <select>
+      <option value="-1">--請選擇行政區--</option>
+      <option value="前金區">前金區</option>
+      <option value="新興區">新興區</option>
+      <option value="鹽埕區">鹽埕區</option>
+      <option value="左營區">左營區</option>
+      <option value="楠梓區">楠梓區</option>
+      <option value="鼓山區">鼓山區</option>
+      <option value="旗津區">旗津區</option>
+      <option value="苓雅區">苓雅區</option>
+      <option value="三民區">三民區</option>
+      <option value="前鎮區">前鎮區</option>
+      <option value="小港區">小港區</option>
+    </select>
+    <br />
+    <br />
+    <hr />
+    <div class="render-area"></div>
+    <div class="pagination-area"></div>
+    <template id="travel-card-template">
+      <div class="card">
+        <div class="card-header">
+          <img src="" alt="景區圖片" id="card-img" class="card-img" />
+          <h3 id="card-title" class="card-title"></h3>
+          <p id="card-subtitle" class="card-subtitle"></p>
+        </div>
+        <div class="card-body">
+          <p id="card-time" class="card-time">
+            <img src="./assets/icons_clock.png" alt="開放時間" />
+          </p>
+          <p id="card-address" class="card-address">
+            <img src="./assets/icons_pin.png" alt="地址" />
+          </p>
+          <p id="card-tel" class="card-tel">
+            <img src="./assets/icons_phone.png" alt="電話" />
+          </p>
+          <span id="card-tag" class="card-tag"
+            ><img src="./assets/icons_tag.png" alt="標籤"
+          /></span>
+        </div>
+      </div>
+    </template>
+    <template id="pagination-template">
+      <ul class="pagination">
+        <li id="page-prev"><a href="#">&lt; prev</a></li>
+        <li id="page-next"><a href="#">next &gt;</a></li>
+      </div>
+    </template>
+    <script src="script.js"></script>
+  </body>
+</html>
