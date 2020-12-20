@@ -14,16 +14,16 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
     />
     <link rel="stylesheet" href="all.css" />
-    <meta name="description" content="六角學院 JavaScript 最終作業" />
+    <meta name="description" content="六角學院 JavaScript 高雄旅遊資訊最終作業" />
     <meta
       name="keywords"
-      content="Kalpas Wang, HexSchool, JavaScript, 最終作業"
+      content="Kalpas Wang, HexSchool, JavaScript, 高雄旅遊資訊, 最終作業"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta property="og:title" content="六角學院 JavaScript 最終作業" />
+    <meta property="og:title" content="六角學院 JavaScript 高雄旅遊資訊最終作業" />
     <meta
       property="og:description"
-      content="由王偉航（Kalpas Wang）所練習的 JavaScript 最終作業"
+      content="由王偉航（Kalpas Wang）所練習的 JavaScript 高雄旅遊資訊最終作業"
     />
     <meta
       property="og:url"
@@ -36,25 +36,50 @@
     <meta property="og:image:height" content="50" />
   </head>
   <body>
-    <select>
-      <option value="-1">--請選擇行政區--</option>
-      <option value="前金區">前金區</option>
-      <option value="新興區">新興區</option>
-      <option value="鹽埕區">鹽埕區</option>
-      <option value="左營區">左營區</option>
-      <option value="楠梓區">楠梓區</option>
-      <option value="鼓山區">鼓山區</option>
-      <option value="旗津區">旗津區</option>
-      <option value="苓雅區">苓雅區</option>
-      <option value="三民區">三民區</option>
-      <option value="前鎮區">前鎮區</option>
-      <option value="小港區">小港區</option>
-    </select>
-    <br />
-    <br />
-    <hr />
-    <div class="render-area"></div>
-    <div class="pagination-area"></div>
+    <div class="container">
+      <header>
+        <h1>高雄旅遊資訊</h1>
+        <div class="select-area">
+          <select>
+            <option value="-1">-- 請選擇行政區 --</option>
+            <option value="前金區">前金區</option>
+            <option value="新興區">新興區</option>
+            <option value="鹽埕區">鹽埕區</option>
+            <option value="左營區">左營區</option>
+            <option value="楠梓區">楠梓區</option>
+            <option value="鼓山區">鼓山區</option>
+            <option value="旗津區">旗津區</option>
+            <option value="苓雅區">苓雅區</option>
+            <option value="三民區">三民區</option>
+            <option value="前鎮區">前鎮區</option>
+            <option value="小港區">小港區</option>
+          </select>
+        </div>
+        <div class="hot-district">
+          <h3>熱門行政區</h3>
+          <ul>
+            <li><a href="#" data-value="苓雅區" class="district district-1">苓雅區</a></li>
+            <li><a href="#" data-value="三民區" class="district district-2">三民區</a></li>
+            <li><a href="#" data-value="鹽埕區" class="district district-3">鹽埕區</a></li>
+            <li><a href="#" data-value="新興區" class="district district-4">新興區</a></li>
+          </ul>
+        </div>
+      </header>
+      <div class="dashed-line">
+        <div class="down-icon">
+          <i class="fas fa-sort-down"></i>
+        </div>
+      </div>
+      <div class="render-area"></div>
+      <div class="pagination-area"></div>
+    </div>
+    <footer>
+      <div class="wrap">
+        <h2><a href="#">高雄旅遊網</a></h2>
+        <p>資料來源：高雄市政府</p>
+      </div>
+    </footer>
+
     <template id="travel-card-template">
       <div class="card">
         <div class="card-header">

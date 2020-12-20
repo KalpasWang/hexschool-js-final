@@ -1,3 +1,292 @@
+/* RESET */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/* RESET 結束 */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Microsoft JhengHei',
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.container {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+/* 頁首 */
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 380px;
+  background: url(./assets/Hero.png) no-repeat center center;
+  background-size: cover;
+  padding-top: 89px;
+  margin-bottom: 133px;
+  overflow: visible;
+}
+
+header h1 {
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 4px;
+  margin-bottom: 96px;
+}
+
+header .select-area {
+  display: inline-block;
+  width: 90%;
+  max-width: 452px;
+  margin-bottom: 79px;
+}
+
+header select {
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 12px;
+  padding-left: 10px;
+  padding-right: 30px;
+  font-size: 18px;
+  outline: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.7) url(./assets/icons_down.png) no-repeat
+    98% center;
+  border: 3px solid #fff;
+  border-radius: 3px;
+}
+
+header .hot-district {
+  /* display: inline-block; */
+  background: #fff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 20px 26px;
+}
+
+header > .hot-district > h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+header > .hot-district li {
+  display: inline-block;
+  margin-left: 23px;
+  background-color: #000;
+}
+
+header > .hot-district .district {
+  display: inline-block;
+  padding: 11px 34px;
+  border-right: 5px;
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+header > .hot-district .district:hover {
+  opacity: 0.8;
+}
+
+header > .hot-district .district-1 {
+  background: #8a82cc;
+}
+header > .hot-district .district-2 {
+  background: #ffa728;
+}
+header > .hot-district .district-3 {
+  background: #f5d005;
+}
+header > .hot-district .district-4 {
+  background: #559ac8;
+}
+
+/* 虛線 + 箭頭 */
+.dashed-line {
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 76px;
+  border-top: 2px dashed #559ac8;
+}
+
+.dashed-line .down-icon {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  color: #559ac8;
+  font-size: 20px;
+  text-align: center;
+  border: 2px solid #559ac8;
+  border-radius: 50%;
+}
+
+.dashed-line .fa-sort-down::before {
+  position: relative;
+  bottom: 3px;
+}
+
+/* 頁尾 */
+
+footer {
+  background: #559ac8;
+  color: #ffd366;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+footer .wrap {
+  display: inline-block;
+  margin: 24px auto;
+  text-align: center;
+}
+
+footer h2 {
+  margin-bottom: 15px;
+}
+
+footer h2 a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* 分頁功能元件 */
 .pagination,
 .pagination li {
   display: inline-block;
