@@ -1,10 +1,12 @@
 var data;
 var defaultZone = '三民區';
+var selectedZoneName = defaultZone;
 var selectedData = { data: [] }; // 使用者選取的區域資料
 var selectedDataProxy; // 使用者選取的區域資料 proxy
 
 function init() {
   var select = document.querySelector('select'); // 行政區下拉清單
+  var hotDistrict = document.querySelectorAll('a.district'); // 熱門行政區清單
 
   // AJAX　取得資料
   var xhr = new XMLHttpRequest();
@@ -31,6 +33,9 @@ function init() {
 
   // 設定 event handler
   select.addEventListener('change', eventHandler['selectChange']);
+  hotDistrict.forEach(function (item) {
+    item.addEventListener('click', eventHandler['selectHotSpot']);
+  });
 
   // 設定 proxy，當 selectedData 變動就會觸發 render 函式
   selectedDataProxy = new Proxy(selectedData, {
@@ -46,10 +51,28 @@ function init() {
   });
 }
 
+// 篩選出目前行政區的資料
+function filterData(selectedZone) {
+  return data.filter(function (item) {
+    if (item.Zone === selectedZone) {
+      return true;
+    }
+  });
+}
+
 // 所有事件的處理函式
 var eventHandler = {
   selectChange: function (e) {
+    e.preventDefault();
     var selectedZone = e.target.value;
+    selectedZoneName = selectedZone;
+    selectedDataProxy.data = filterData(selectedZone);
+  },
+
+  selectHotSpot: function (e) {
+    e.preventDefault();
+    var selectedZone = e.target.dataset.value;
+    selectedZoneName = selectedZone;
     selectedDataProxy.data = filterData(selectedZone);
   },
 
@@ -62,20 +85,13 @@ var eventHandler = {
     e.preventDefault();
     renderer.redraw('prev');
   },
+
   selectPage: function (e) {
     e.preventDefault();
     pageNum = parseInt(e.target.dataset.page);
     renderer.redraw(pageNum);
   },
 };
-
-function filterData(selectedZone) {
-  return data.filter(function (item) {
-    if (item.Zone === selectedZone) {
-      return true;
-    }
-  });
-}
 
 // 處理旅遊景點卡片與分頁的渲染器
 var renderer = {
@@ -120,6 +136,15 @@ var renderer = {
     // 清除目前顯示的資料
     this._cardsRenderArea.textContent = '';
 
+    // 建立 DOM fragment並插入h2與卡片容器
+    var fragment = document.createDocumentFragment();
+    var h2 = document.createElement('h2');
+    var cardList = document.createElement('div');
+    cardList.className = 'card-list';
+    h2.textContent = selectedZoneName;
+    fragment.appendChild(h2);
+    fragment.appendChild(cardList);
+
     var c = this._cardTemplate;
     var dataIndex = this._currentPage - 1;
     var data = this._dataArray[dataIndex];
@@ -130,11 +155,26 @@ var renderer = {
       data.forEach((el) => {
         var clone = document.importNode(c.content, true);
         clone.getElementById('card-img').src = el.Picture1;
-        this._cardsRenderArea.appendChild(clone);
+        clone.getElementById('card-title').textContent = el.Name;
+        clone.getElementById('card-subtitle').textContent = el.Zone;
+        clone
+          .getElementById('card-time')
+          .insertAdjacentText('beforeend', el.Opentime);
+        clone
+          .getElementById('card-address')
+          .insertAdjacentText('beforeend', el.Add);
+        clone
+          .getElementById('card-tel')
+          .insertAdjacentText('beforeend', el.Tel);
+        clone
+          .getElementById('card-tag')
+          .insertAdjacentText('beforeend', el.Ticketinfo);
+        cardList.appendChild(clone);
       });
     } else {
-      this._cardsRenderArea.innerHTML = '<p>查無資料</p>';
+      cardList.innerHTML = '<p class="no-card">查無資料</p>';
     }
+    this._cardsRenderArea.appendChild(fragment);
   },
 
   _drawPagination: function () {

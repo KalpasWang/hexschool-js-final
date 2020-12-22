@@ -14,13 +14,19 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
     />
     <link rel="stylesheet" href="all.css" />
-    <meta name="description" content="六角學院 JavaScript 高雄旅遊資訊最終作業" />
+    <meta
+      name="description"
+      content="六角學院 JavaScript 高雄旅遊資訊最終作業"
+    />
     <meta
       name="keywords"
       content="Kalpas Wang, HexSchool, JavaScript, 高雄旅遊資訊, 最終作業"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta property="og:title" content="六角學院 JavaScript 高雄旅遊資訊最終作業" />
+    <meta
+      property="og:title"
+      content="六角學院 JavaScript 高雄旅遊資訊最終作業"
+    />
     <meta
       property="og:description"
       content="由王偉航（Kalpas Wang）所練習的 JavaScript 高雄旅遊資訊最終作業"
@@ -58,10 +64,26 @@
         <div class="hot-district">
           <h3>熱門行政區</h3>
           <ul>
-            <li><a href="#" data-value="苓雅區" class="district district-1">苓雅區</a></li>
-            <li><a href="#" data-value="三民區" class="district district-2">三民區</a></li>
-            <li><a href="#" data-value="鹽埕區" class="district district-3">鹽埕區</a></li>
-            <li><a href="#" data-value="新興區" class="district district-4">新興區</a></li>
+            <li>
+              <a href="#" data-value="苓雅區" class="district district-1"
+                >苓雅區</a
+              >
+            </li>
+            <li>
+              <a href="#" data-value="三民區" class="district district-2"
+                >三民區</a
+              >
+            </li>
+            <li>
+              <a href="#" data-value="鹽埕區" class="district district-3"
+                >鹽埕區</a
+              >
+            </li>
+            <li>
+              <a href="#" data-value="新興區" class="district district-4"
+                >新興區</a
+              >
+            </li>
           </ul>
         </div>
       </header>
@@ -89,17 +111,17 @@
         </div>
         <div class="card-body">
           <p id="card-time" class="card-time">
-            <img src="./assets/icons_clock.png" alt="開放時間" />
+            <span><img src="./assets/icons_clock.png" alt="開放時間" /></span>
           </p>
           <p id="card-address" class="card-address">
-            <img src="./assets/icons_pin.png" alt="地址" />
+            <span><img src="./assets/icons_pin.png" alt="地址" /></span>
           </p>
           <p id="card-tel" class="card-tel">
-            <img src="./assets/icons_phone.png" alt="電話" />
+            <span><img src="./assets/icons_phone.png" alt="電話" /></span>
           </p>
-          <span id="card-tag" class="card-tag"
-            ><img src="./assets/icons_tag.png" alt="標籤"
-          /></span>
+          <div id="card-tag" class="card-tag">
+            <span><img src="./assets/icons_tag.png" alt="標籤" /></span>
+          </div>
         </div>
       </div>
     </template>
@@ -107,7 +129,7 @@
       <ul class="pagination">
         <li id="page-prev"><a href="#">&lt; prev</a></li>
         <li id="page-next"><a href="#">next &gt;</a></li>
-      </div>
+      </ul>
     </template>
     <script src="script.js"></script>
   </body>
