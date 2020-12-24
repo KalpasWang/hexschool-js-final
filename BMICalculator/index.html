@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1><a href="#">BMI Calculator</a></h1>
+        <div class="bmi-input-area">
+          <div class="input-group">
+            <label for="height">身高 cm</label>
+            <input type="number" id="height" placeholder="請輸入身高" />
+          </div>
+          <div class="input-group">
+            <label for="weight">體重 kg</label>
+            <input type="number" id="weight" placeholder="請輸入體重" />
+          </div>
+        </div>
+        <div>
+          <div id="summary" class="summary"></div>
+          <button id="get-result" class="get-result">看結果</button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <h2>BMI 紀錄</h2>
+      <ul id="bmi-history" class="bmi-history"></ul>
+      <button id="clear" class="btn btn-warning">清除歷史</button>
+    </main>
+    <footer>
+      <h2><a href="#">BMI Calculator</a></h2>
+    </footer>
+    <script src="all.js"></script>
+  </body>
+</html>
