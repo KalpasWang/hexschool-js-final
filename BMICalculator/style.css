@@ -1,0 +1,233 @@
+/* RESET CSS */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+/* RESET CSS End */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Microsoft JhengHei',
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.container {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+header {
+  background: #424242;
+  color: #ffd366;
+}
+
+header .flex-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 70%;
+  padding-top: 75px;
+  padding-bottom: 75px;
+}
+
+header .flex-inner {
+  flex: 1;
+  display: inline-flex;
+  justify-content: center;
+}
+
+header h1 {
+  margin-top: 18px;
+}
+
+header h1 a {
+  display: block;
+  width: 117px;
+  height: 117px;
+  background: url(./assets/BMICLogo.png);
+  text-indent: 101%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+header .bmi-input-area {
+  max-width: 250px;
+  flex-direction: column;
+}
+
+header .input-group:first-child {
+  margin-bottom: 23px;
+}
+
+header .bmi-input-area label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 18px;
+}
+
+header .bmi-input-area input {
+  width: 100%;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  border: 2px solid #ffd366;
+  border-radius: 10px;
+  font-size: 24px;
+  padding: 8px 16px;
+  outline: none;
+}
+
+header .bmi-input-area input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+header .result-wrapper {
+  width: 120px;
+  height: 120px;
+  margin-top: 18px;
+}
+
+header .get-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  text-decoration: none;
+  border: none;
+  color: #424242;
+  background: #ffd366;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+header .get-result:hover {
+  background: #fecb42;
+}

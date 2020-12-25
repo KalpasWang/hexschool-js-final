@@ -8,9 +8,9 @@
   </head>
   <body>
     <header>
-      <div class="container">
-        <h1><a href="#">BMI Calculator</a></h1>
-        <div class="bmi-input-area">
+      <div class="container flex-wrapper">
+        <h1 class="flex-inner"><a href="#">BMI Calculator</a></h1>
+        <div class="bmi-input-area flex-inner">
           <div class="input-group">
             <label for="height">身高 cm</label>
             <input type="number" id="height" placeholder="請輸入身高" />
@@ -20,9 +20,13 @@
             <input type="number" id="weight" placeholder="請輸入體重" />
           </div>
         </div>
-        <div>
-          <div id="summary" class="summary"></div>
-          <button id="get-result" class="get-result">看結果</button>
+        <div class="flex-inner">
+          <div class="result-wrapper">
+            <div id="summary" class="summary"></div>
+            <a href="javascript:void(0)" id="get-result" class="get-result"
+              >看結果</a
+            >
+          </div>
         </div>
       </div>
     </header>
