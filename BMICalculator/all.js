@@ -30,7 +30,7 @@ class UI {
     this.clear = document.getElementById('clear');
   }
   showOldData(oldData) {
-    if (!oldData.length) return;
+    if (!oldData || !oldData.length) return;
     oldData.forEach((item) => {
       const li = document.createElement('li');
       li.textContent = `
@@ -74,18 +74,22 @@ class UI {
   addGetResultEvent(handler) {
     this.getResult.addEventListener('click', handler);
   }
-  addClearHistoryEvent(handler) {
-    this.clear.addEventListener('click', function () {
-      handler();
-      bmiHistory.innerHTML = '';
+  addClearHistoryEvent(storage) {
+    this.clear.addEventListener('click', () => {
+      storage.clearData();
+      this.bmiHistory.innerHTML = '';
     });
   }
 }
 
 class Utils {
   static calculateBmi(weight, height) {
-    const w = Number.parseInt(weight);
-    const h = Number.parseInt(height) / 100;
+    const w = parseInt(weight);
+    const h = parseInt(height) / 100;
+
+    if (!w || !h || w <= 0 || h <= 0) {
+      return false;
+    }
     const bmi = (w / (h * h)).toFixed(2);
 
     if (bmi <= 0 || !isFinite(bmi) || isNaN(bmi)) {
@@ -128,11 +132,15 @@ function init() {
   ui.addGetResultEvent(function () {
     const { weight, height } = ui.getUserData();
     const bmi = Utils.calculateBmi(weight, height);
+    if (!bmi) {
+      alert('數值錯誤，請重新輸入');
+      return;
+    }
     const status = Utils.checkBmiStatus(bmi);
     const newData = ui.renderResult(bmi, status);
     storage.storeData(newData);
   });
-  ui.addClearHistoryEvent(storage.clearData);
+  ui.addClearHistoryEvent(storage);
 }
 
 init();
