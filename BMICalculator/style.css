@@ -142,7 +142,7 @@ body {
   margin: 0 auto;
 }
 
-/* HEADER */
+/* 頁首 header */
 header {
   background: #424242;
   color: #ffd366;
@@ -152,7 +152,7 @@ header .flex-wrapper {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  width: 70%;
+  width: 75%;
   padding-top: 75px;
   padding-bottom: 75px;
 }
@@ -221,13 +221,146 @@ header .get-result {
   height: 100%;
   border-radius: 50%;
   text-decoration: none;
+  outline: none;
   border: none;
   color: #424242;
   background: #ffd366;
   font-size: 24px;
   cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(255, 196, 50, 0.64);
+  transition: all 0.3s ease;
 }
 
-header .get-result:hover {
-  background: #fecb42;
+header .get-result:hover,
+header .get-result:focus {
+  box-shadow: 0 1px 6px 3px rgba(255, 196, 50, 0.64);
+}
+
+header .get-result:active {
+  background: #dea821;
+}
+
+/* 歷史紀錄區域 main */
+main {
+  padding-top: 48px;
+  padding-bottom: 58px;
+  background: #f5f5f5;
+  color: #424242;
+}
+
+main h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+main .bmi-history {
+  width: 60%;
+  margin: 0 auto;
+  color: #4a4a4a;
+}
+
+.bmi-history > li {
+  display: flex;
+  min-height: 62px;
+  border-left-width: 7px;
+  border-left-style: solid;
+  margin-bottom: 16px;
+  font-size: 20px;
+  background: #fff;
+  transition: transform 0.3s ease;
+}
+
+.bmi-history > li:hover {
+  transform: scale(1.05);
+}
+
+.bmi-history > .ideal {
+  border-left-color: #86d73f;
+}
+
+.bmi-history > .underweight {
+  border-left-color: #31baf9;
+}
+
+.bmi-history > .overweight {
+  border-left-color: #ff982d;
+}
+
+.bmi-history > .obeseClass1 {
+  border-left-color: #ff6c03;
+}
+
+.bmi-history > .obeseClass2 {
+  border-left-color: #ff6c03;
+}
+
+.bmi-history > .obeseClass3 {
+  border-left-color: #ff1200;
+}
+
+.bmi-history .cell {
+  display: inline-flex;
+  align-items: center;
+  width: 20%;
+  padding: 10px 0;
+}
+
+.bmi-history li .status {
+  width: 23%;
+  font-size: 24px;
+  padding-left: 12px;
+}
+
+.bmi-history li .date {
+  width: 17%;
+  justify-content: flex-end;
+  padding-right: 12px;
+}
+
+.bmi-history .cell small {
+  font-size: 12px;
+}
+
+main .btn-clear {
+  display: block;
+  border: none;
+  padding: 8px 16px;
+  margin: 0 auto;
+  border-radius: 5px;
+  text-decoration: none;
+  outline: none;
+  background: #ffd366;
+  color: #424242;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+main .btn-clear:hover,
+main .btn-clear:focus {
+  box-shadow: 0 1px 6px 3px rgba(255, 196, 50, 0.64);
+}
+
+main .btn-clear:active {
+  background: #dea821;
+}
+
+/* 頁尾 footer */
+footer {
+  padding: 18px 0;
+  background: #ffd366;
+}
+
+footer h2 a {
+  display: block;
+  width: 55px;
+  height: 55px;
+  margin: 0 auto;
+  background: url(./assets/BMICLogo.png);
+  background-size: contain;
+  filter: brightness(0.1);
+  text-indent: 101%;
+  white-space: nowrap;
+  overflow: hidden;
 }

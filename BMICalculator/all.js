@@ -32,44 +32,39 @@ class UI {
   showOldData(oldData) {
     if (!oldData || !oldData.length) return;
     oldData.forEach((item) => {
-      const li = document.createElement('li');
-      li.textContent = `
-        ${item.status} 
-        BMI:${item.bmi} 
-        Weight:${item.w} 
-        height:${item.h} 
-        ${item.today}
-      `;
-      this.bmiHistory.appendChild(li);
+      this.bmiHistory.insertAdjacentHTML('beforeend', this.getTemplate(item));
     });
   }
-  renderResult(bmi, status) {
-    this.summary.innerHTML = `<p>BMI: ${bmi}  Status: ${status}</p>`;
+  renderResult(bmi, { statusZh, statusEn }) {
+    this.summary.innerHTML = `<p>BMI: ${bmi}  Status: ${statusZh}</p>`;
     const today = Utils.getToday();
-    const w = this.weight.value;
-    const h = this.height.value;
-    this.bmiHistory.insertAdjacentHTML(
-      'afterbegin',
-      `<li>${status} 
-        BMI:${bmi} 
-        Weight:${w} 
-        height:${h} 
-        ${today}
-      </li>`
-    );
-    return {
+    const weight = this.weight.value;
+    const height = this.height.value;
+    const bmiData = {
       bmi,
-      status,
-      w,
-      h,
+      statusZh,
+      statusEn,
+      weight,
+      height,
       today,
     };
+    this.bmiHistory.insertAdjacentHTML('afterbegin', this.getTemplate(bmiData));
+    return bmiData;
   }
   getUserData() {
     return {
       weight: this.weight.value,
       height: this.height.value,
     };
+  }
+  getTemplate(bmiData) {
+    return `<li class="${bmiData.statusEn}">
+              <div class="cell status">${bmiData.statusZh}</div> 
+              <div class="cell bmi"><small>BMI</small>&nbsp;${bmiData.bmi}</div> 
+              <div class="cell weight"><small>weight</small>&nbsp;${bmiData.weight}</div> 
+              <div class="cell height"><small>height</small>&nbsp;${bmiData.height}</div> 
+              <div class="cell date"><small>${bmiData.today}</small></div> 
+            </li>`;
   }
   addGetResultEvent(handler) {
     this.getResult.addEventListener('click', handler);
@@ -107,20 +102,25 @@ class Utils {
     return `${monthStr}-${day}-${year}`;
   }
   static checkBmiStatus(bmi) {
-    let status = '理想';
-    const underweight = '過輕';
-    const overweight = '過重';
-    const obeseClass1 = '輕度肥胖';
-    const obeseClass2 = '中度肥胖';
-    const obeseClass3 = '重度肥胖';
+    let status;
+    const statusMap = {
+      ideal: ['理想', 'ideal'],
+      underweight: ['過輕', 'underweight'],
+      overweight: ['過重', 'overweight'],
+      obeseClass1: ['輕度肥胖', 'obeseClass1'],
+      obeseClass2: ['中度肥胖', 'obeseClass2'],
+      obeseClass3: ['重度肥胖', 'obeseClass3'],
+    };
 
-    if (bmi < 18.5) status = underweight;
-    else if (bmi >= 24 && bmi < 27) status = overweight;
-    else if (bmi >= 27 && bmi < 30) status = obeseClass1;
-    else if (bmi >= 30 && bmi < 35) status = obeseClass2;
-    else if (bmi >= 35) status = obeseClass3;
+    if (bmi < 18.5) status = statusMap.underweight;
+    else if (bmi >= 18.5 && bmi < 24) status = statusMap.ideal;
+    else if (bmi >= 24 && bmi < 27) status = statusMap.overweight;
+    else if (bmi >= 27 && bmi < 30) status = statusMap.obeseClass1;
+    else if (bmi >= 30 && bmi < 35) status = statusMap.obeseClass2;
+    else if (bmi >= 35) status = statusMap.obeseClass3;
+    else return 'Error';
 
-    return status;
+    return { statusZh: status[0], statusEn: status[1] };
   }
 }
 
