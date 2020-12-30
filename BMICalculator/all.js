@@ -28,15 +28,25 @@ class UI {
     this.bmiHistory = document.getElementById('bmi-history');
     this.summary = document.getElementById('summary');
     this.clear = document.getElementById('clear');
+    this.refresh = document.getElementById('refresh');
+    this.addRefreshEvent();
   }
   showOldData(oldData) {
     if (!oldData || !oldData.length) return;
     oldData.forEach((item) => {
-      this.bmiHistory.insertAdjacentHTML('beforeend', this.getTemplate(item));
+      this.bmiHistory.insertAdjacentHTML(
+        'beforeend',
+        this.getTemplate(item, true)
+      );
     });
   }
   renderResult(bmi, { statusZh, statusEn }) {
-    this.summary.innerHTML = `<p>BMI: ${bmi}  Status: ${statusZh}</p>`;
+    this.summary.querySelector('.status').className = `status ${statusEn}`;
+    this.summary.querySelector('.status-circle-title').textContent = `${bmi}`;
+    this.summary.querySelector('.status-title').textContent = `${statusZh}`;
+    this.fadeIn(this.summary);
+    this.fadeOut(this.getResult);
+
     const today = Utils.getToday();
     const weight = this.weight.value;
     const height = this.height.value;
@@ -49,6 +59,7 @@ class UI {
       today,
     };
     this.bmiHistory.insertAdjacentHTML('afterbegin', this.getTemplate(bmiData));
+    this.setListItemAnimation('li:first-child');
     return bmiData;
   }
   getUserData() {
@@ -57,8 +68,9 @@ class UI {
       height: this.height.value,
     };
   }
-  getTemplate(bmiData) {
-    return `<li class="${bmiData.statusEn}">
+  getTemplate(bmiData, isOld) {
+    const show = isOld ? 'show ' : '';
+    return `<li class="${show}${bmiData.statusEn}">
               <div class="cell status">${bmiData.statusZh}</div> 
               <div class="cell bmi"><small>BMI</small>&nbsp;${bmiData.bmi}</div> 
               <div class="cell weight"><small>weight</small>&nbsp;${bmiData.weight}</div> 
@@ -73,6 +85,40 @@ class UI {
     this.clear.addEventListener('click', () => {
       storage.clearData();
       this.bmiHistory.innerHTML = '';
+    });
+  }
+  addRefreshEvent() {
+    const handler = () => {
+      this.fadeOut(this.summary);
+      this.fadeIn(this.getResult);
+      this.height.value = '';
+      this.weight.value = '';
+    };
+    this.refresh.addEventListener('click', handler);
+    this.refresh.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        handler();
+      }
+    });
+  }
+  fadeOut(el) {
+    el.classList.add('hidden');
+    el.addEventListener(
+      'transitionend',
+      function () {
+        el.style.visibility = 'hidden';
+      },
+      { once: true }
+    );
+  }
+  fadeIn(el) {
+    el.style.visibility = 'visible';
+    el.classList.remove('hidden');
+  }
+  setListItemAnimation(selector) {
+    const li = document.querySelector(selector);
+    setTimeout(() => {
+      li.classList.add('show');
     });
   }
 }

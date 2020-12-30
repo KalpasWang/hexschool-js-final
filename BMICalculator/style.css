@@ -208,12 +208,14 @@ header .bmi-input-area input::placeholder {
 }
 
 header .result-wrapper {
-  width: 120px;
-  height: 120px;
+  position: relative;
+  width: 123px;
+  height: 123px;
   margin-top: 18px;
 }
 
 header .get-result {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -222,13 +224,13 @@ header .get-result {
   border-radius: 50%;
   text-decoration: none;
   outline: none;
-  border: none;
   color: #424242;
   background: #ffd366;
   font-size: 24px;
   cursor: pointer;
   box-shadow: 0 0 0 0 rgba(255, 196, 50, 0.64);
-  transition: all 0.3s ease;
+  opacity: 1;
+  transition: all 0.5s ease;
 }
 
 header .get-result:hover,
@@ -238,6 +240,129 @@ header .get-result:focus {
 
 header .get-result:active {
   background: #dea821;
+}
+
+header .get-result.hidden {
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+header .summary {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: all 0.5s ease;
+}
+
+header .summary.hidden {
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.summary > .status {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.summary > .ideal > * {
+  border-color: #86d73f;
+  color: #86d73f;
+}
+
+.summary > .underweight > * {
+  border-color: #31baf9;
+  color: #31baf9;
+}
+
+.summary > .overweight > * {
+  border-color: #ff982d;
+  color: #ff982d;
+}
+
+.summary > .obeseClass1 > * {
+  border-color: #ff6c03;
+  color: #ff6c03;
+}
+
+.summary > .obeseClass2 > * {
+  border-color: #ff6c03;
+  color: #ff6c03;
+}
+
+.summary > .obeseClass3 > * {
+  border-color: #ff1200;
+  color: #ff1200;
+}
+
+.summary > .status > .status-circle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  text-decoration: none;
+  outline: none;
+  border-width: 6px;
+  border-style: solid;
+}
+
+.summary .status-circle > h3 {
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.summary .status-circle > p {
+  font-size: 14px;
+}
+
+.summary .status-title {
+  position: absolute;
+  top: 50%;
+  right: -18px;
+  transform: translate(100%, -50%);
+  font-size: 32px;
+}
+
+.summary .status-refresh {
+  position: absolute;
+  bottom: 6px;
+  right: -10px;
+  padding: 3px;
+  border-radius: 100px;
+  background: #424242;
+  outline: none;
+  cursor: pointer;
+}
+
+.summary .status-refresh:hover .loop-icon,
+.summary .status-refresh:focus .loop-icon {
+  animation: rotate 2s linear infinite;
+}
+
+.summary .fa-circle {
+  font-size: 30px;
+}
+.summary .loop-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes rotate {
+  to {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  from {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 /* 歷史紀錄區域 main */
@@ -258,22 +383,32 @@ main .bmi-history {
   width: 60%;
   margin: 0 auto;
   color: #4a4a4a;
+  perspective: 100px;
 }
 
 .bmi-history > li {
   display: flex;
-  min-height: 62px;
   border-left-width: 7px;
   border-left-style: solid;
   margin-bottom: 16px;
   font-size: 20px;
   background: #fff;
-  transition: transform 0.3s ease;
+  opacity: 0;
+  height: 0;
+  transform: rotateX(-90deg);
+  transition: all 0.5s cubic-bezier(0.36, -0.64, 0.34, 1.76);
 }
 
-.bmi-history > li:hover {
-  transform: scale(1.05);
+.bmi-history > li.show {
+  opacity: 1;
+  height: 100%;
+  transform: none;
+  transition: all 0.5s cubic-bezier(0.36, -0.64, 0.34, 1.76);
 }
+
+/* .bmi-history > li:hover {
+  transform: scale(1.05);
+} */
 
 .bmi-history > .ideal {
   border-left-color: #86d73f;
@@ -303,7 +438,7 @@ main .bmi-history {
   display: inline-flex;
   align-items: center;
   width: 20%;
-  padding: 10px 0;
+  padding: 20px 0;
 }
 
 .bmi-history li .status {
@@ -359,6 +494,7 @@ footer h2 a {
   margin: 0 auto;
   background: url(./assets/BMICLogo.png);
   background-size: contain;
+  outline: none;
   filter: brightness(0.1);
   text-indent: 101%;
   white-space: nowrap;
