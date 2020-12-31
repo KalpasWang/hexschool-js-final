@@ -365,6 +365,40 @@ header .summary.hidden {
   }
 }
 
+@media (max-width: 767px) {
+  header .flex-wrapper {
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 90%;
+    padding: 0 0 20px;
+  }
+
+  header .flex-inner:first-child {
+    flex-basis: 100%;
+    margin-bottom: 30px;
+  }
+
+  header .flex-inner:nth-child(2) {
+    flex-basis: 60%;
+    max-width: none;
+  }
+
+  header .flex-inner:last-child {
+    flex-basis: 40%;
+    align-items: center;
+  }
+
+  header h1 a {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 575px) {
+  .summary .status-title {
+    right: -3px;
+  }
+}
+
 /* 歷史紀錄區域 main */
 main {
   padding-top: 48px;
@@ -383,7 +417,7 @@ main .bmi-history {
   width: 60%;
   margin: 0 auto;
   color: #4a4a4a;
-  perspective: 100px;
+  perspective: 500px;
 }
 
 .bmi-history > li {
@@ -479,6 +513,48 @@ main .btn-clear:focus {
 
 main .btn-clear:active {
   background: #dea821;
+}
+
+@media (max-width: 767px) {
+  main .bmi-history {
+    width: 80%;
+  }
+
+  .bmi-history li {
+    flex-wrap: wrap;
+  }
+
+  .bmi-history li .cell {
+    width: 23%;
+  }
+
+  .bmi-history li .status {
+    width: 31%;
+  }
+
+  .bmi-history li .date {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 575px) {
+  main .bmi-history {
+    width: 95%;
+  }
+
+  .bmi-history li .cell {
+    width: 33.333%;
+    justify-content: center;
+  }
+
+  .bmi-history li .status {
+    width: 100%;
+  }
+
+  .bmi-history li .date {
+    width: 100%;
+  }
 }
 
 /* 頁尾 footer */

@@ -119,7 +119,7 @@ class UI {
     const li = document.querySelector(selector);
     setTimeout(() => {
       li.classList.add('show');
-    });
+    }, 500);
   }
 }
 
