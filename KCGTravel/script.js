@@ -1,12 +1,12 @@
 var data;
 var defaultZone = '三民區';
 var selectedZoneName = defaultZone;
-var selectedData = { data: [] }; // 使用者選取的區域資料
-var selectedDataProxy; // 使用者選取的區域資料 proxy
+var selectedData = { data: [] }; // 使用者選取的行政區資料
+var selectedDataProxy; // 使用者選取的行政區資料 proxy
 
 function init() {
   var select = document.querySelector('select'); // 行政區下拉清單
-  var hotDistrict = document.querySelectorAll('a.district'); // 熱門行政區清單
+  var hotDistrict = document.querySelector('.hot-district'); // 熱門行政區清單
 
   // AJAX　取得資料
   var xhr = new XMLHttpRequest();
@@ -33,18 +33,12 @@ function init() {
 
   // 設定 event handler
   select.addEventListener('change', eventHandler['selectChange']);
-  hotDistrict.forEach(function (item) {
-    item.addEventListener('click', eventHandler['selectHotSpot']);
-  });
+  hotDistrict.addEventListener('click', eventHandler['selectHotSpot'], false);
 
   // 設定 proxy，當 selectedData 變動就會觸發 render 函式
   selectedDataProxy = new Proxy(selectedData, {
     set: function (target, prop, value) {
       target[prop] = value;
-      // console.log(
-      //   '🚀 ~ file: script.js ~ line 38 ~ init ~ target[prop]',
-      //   target[prop]
-      // );
       renderer.init(target[prop]);
       renderer.draw();
     },
@@ -71,6 +65,9 @@ var eventHandler = {
 
   selectHotSpot: function (e) {
     e.preventDefault();
+    if (e.target.nodeName !== 'A') {
+      return;
+    }
     var selectedZone = e.target.dataset.value;
     selectedZoneName = selectedZone;
     selectedDataProxy.data = filterData(selectedZone);
@@ -132,6 +129,7 @@ var renderer = {
     this._redrawPagination();
   },
 
+  // 渲染旅遊卡片
   _drawCards: function () {
     // 清除目前顯示的資料
     this._cardsRenderArea.textContent = '';
@@ -177,6 +175,7 @@ var renderer = {
     this._cardsRenderArea.appendChild(fragment);
   },
 
+  // 渲染分頁功能
   _drawPagination: function () {
     var p = this._paginationTemplate;
     var clone = document.importNode(p.content, true);
@@ -214,6 +213,7 @@ var renderer = {
     this._paginationRenderArea.appendChild(clone);
   },
 
+  // 重新繪製分頁功能
   _redrawPagination: function () {
     var pagination = document.getElementsByClassName('pagination')[0];
     var pageLinks = pagination.getElementsByClassName('page-link');
@@ -221,6 +221,7 @@ var renderer = {
     var pre = document.getElementById('page-prev');
     var next = document.getElementById('page-next');
 
+    // 判斷決定 pre 跟 next button 是不是處於 disabled 狀態
     this._checkPaginationDisabled(pre, next);
 
     // 讓目前頁按鈕加上 active class
