@@ -417,7 +417,7 @@ main .bmi-history {
   width: 60%;
   margin: 0 auto;
   color: #4a4a4a;
-  perspective: 500px;
+  perspective: 200px;
 }
 
 .bmi-history > li {
@@ -439,10 +439,6 @@ main .bmi-history {
   transform: none;
   transition: all 0.5s cubic-bezier(0.36, -0.64, 0.34, 1.76);
 }
-
-/* .bmi-history > li:hover {
-  transform: scale(1.05);
-} */
 
 .bmi-history > .ideal {
   border-left-color: #86d73f;
