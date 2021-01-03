@@ -152,7 +152,7 @@ header {
   background: url(./assets/Hero.png) no-repeat center center;
   background-size: cover;
   padding-top: 89px;
-  margin-bottom: 133px;
+  margin-bottom: 210px;
   overflow: visible;
 }
 
@@ -187,6 +187,7 @@ header select {
 }
 
 header .hot-district {
+  position: relative;
   max-width: 90%;
   background: #fff;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
@@ -203,7 +204,7 @@ header > .hot-district > h3 {
 header .hot-district ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -242,10 +243,13 @@ header > .hot-district .district-4 {
 
 /* 虛線 + 箭頭 */
 .dashed-line {
-  position: relative;
-  width: 90%;
+  position: absolute;
+  left: 50%;
+  bottom: -49px;
+  transform: translateX(-50%);
+  width: calc(100% + 60px);
+  max-width: 90vw;
   margin: 0 auto;
-  margin-bottom: 76px;
   border-top: 2px dashed #559ac8;
 }
 
@@ -303,12 +307,6 @@ header > .hot-district .district-4 {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 575px) {
-  .card {
-    width: 100%;
-  }
-}
-
 .card .card-header {
   height: 155px;
   position: relative;
@@ -319,10 +317,18 @@ header > .hot-district .district-4 {
   padding: 15px 26px 20px;
 }
 
-.card .card-title {
+.card .card-text {
   position: absolute;
-  bottom: 14px;
-  left: 22px;
+  bottom: 0;
+  width: 100%;
+  padding: 11px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card .card-title {
   font-size: 24px;
   padding: 3px;
   color: #fff;
@@ -331,9 +337,6 @@ header > .hot-district .district-4 {
 }
 
 .card .card-subtitle {
-  position: absolute;
-  bottom: 11px;
-  right: 22px;
   padding: 3px;
   color: #fff;
   background: rgba(0, 0, 0, 0.3);
@@ -362,6 +365,21 @@ header > .hot-district .district-4 {
   min-width: 97px;
   bottom: 20px;
   right: 30px;
+}
+
+@media (max-width: 767px) {
+  .card .card-tag {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 575px) {
+  .card {
+    width: 100%;
+  }
 }
 
 /* 分頁功能元件 */
