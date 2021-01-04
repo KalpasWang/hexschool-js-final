@@ -54,13 +54,35 @@ function filterData(selectedZone) {
   });
 }
 
+// 取得指定元素的 y 軸座標
+function getYPosition(element) {
+  var y = 0;
+  while (element) {
+    y += element.offsetTop - element.scrollTop; // + element.clientTop;
+    element = element.offsetParent;
+  }
+
+  return y;
+}
+
 // 所有事件的處理函式
 var eventHandler = {
+  offset: getYPosition(document.getElementById('dashed-line')) - 15,
+
+  scrollTo: function (top) {
+    window.scroll({
+      top: top,
+      left: 0,
+      behavior: 'smooth',
+    });
+  },
+
   selectChange: function (e) {
     e.preventDefault();
     var selectedZone = e.target.value;
     selectedZoneName = selectedZone;
     selectedDataProxy.data = filterData(selectedZone);
+    eventHandler.scrollTo(eventHandler.offset);
   },
 
   selectHotSpot: function (e) {
@@ -71,20 +93,24 @@ var eventHandler = {
     var selectedZone = e.target.dataset.value;
     selectedZoneName = selectedZone;
     selectedDataProxy.data = filterData(selectedZone);
+    eventHandler.scrollTo(eventHandler.offset);
   },
 
   nextPage: function (e) {
     e.preventDefault();
+    eventHandler.scrollTo(eventHandler.offset);
     renderer.redraw('next');
   },
 
   prevPage: function (e) {
     e.preventDefault();
+    eventHandler.scrollTo(eventHandler.offset);
     renderer.redraw('prev');
   },
 
   selectPage: function (e) {
     e.preventDefault();
+    eventHandler.scrollTo(eventHandler.offset);
     pageNum = parseInt(e.target.dataset.page);
     renderer.redraw(pageNum);
   },
