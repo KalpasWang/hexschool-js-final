@@ -38,59 +38,61 @@
     <meta property="og:image:height" content="117" />
   </head>
   <body>
-    <!-- header 是輸入身高體重與送出按鈕所在的地方，得到的 BMI 也會顯示在這裡 -->
-    <header>
-      <div class="container flex-wrapper">
-        <!-- 為了讓中間項置中對齊，flex 裡面也用了 inline flex -->
-        <h1 class="flex-inner">
-          <a href="#">BMI Calculator</a>
-        </h1>
-        <div class="bmi-input-area flex-inner">
-          <div class="input-group">
-            <label for="height">身高 cm</label>
-            <input type="number" id="height" placeholder="請輸入身高" />
-          </div>
-          <div class="input-group">
-            <label for="weight">體重 kg</label>
-            <input type="number" id="weight" placeholder="請輸入體重" />
-          </div>
-        </div>
-        <div class="flex-inner">
-          <div class="result-wrapper">
-            <!-- 顯示結果區域 -->
-            <div id="summary" class="summary hidden">
-              <div class="status">
-                <div class="status-circle">
-                  <h3 class="status-circle-title"></h3>
-                  <p>BMI</p>
-                  <div id="refresh" class="status-refresh">
-                    <i class="fas fa-circle"></i>
-                    <img
-                      class="loop-icon"
-                      src="./assets/icons_loop.png"
-                      alt="loop"
-                    />
-                  </div>
-                </div>
-                <h3 class="status-title"></h3>
-              </div>
+    <div class="wrapper">
+      <!-- header 是輸入身高體重與送出按鈕所在的地方，得到的 BMI 也會顯示在這裡 -->
+      <header>
+        <div class="container flex-wrapper">
+          <!-- 為了讓中間項置中對齊，flex 裡面也用了 inline flex -->
+          <h1 class="flex-inner">
+            <a href="#">BMI Calculator</a>
+          </h1>
+          <div class="bmi-input-area flex-inner">
+            <div class="input-group">
+              <label for="height">身高 cm</label>
+              <input type="number" id="height" placeholder="請輸入身高" />
             </div>
-            <!-- 送出按鈕，與顯示結果區域會互相切換 -->
-            <a href="javascript:void(0)" id="get-result" class="get-result"
-              >看結果</a
-            >
+            <div class="input-group">
+              <label for="weight">體重 kg</label>
+              <input type="number" id="weight" placeholder="請輸入體重" />
+            </div>
+          </div>
+          <div class="flex-inner">
+            <div class="result-wrapper">
+              <!-- 顯示結果區域 -->
+              <div id="summary" class="summary hidden">
+                <div class="status">
+                  <div class="status-circle">
+                    <h3 class="status-circle-title"></h3>
+                    <p>BMI</p>
+                    <div id="refresh" class="status-refresh">
+                      <i class="fas fa-circle"></i>
+                      <img
+                        class="loop-icon"
+                        src="./assets/icons_loop.png"
+                        alt="loop"
+                      />
+                    </div>
+                  </div>
+                  <h3 class="status-title"></h3>
+                </div>
+              </div>
+              <!-- 送出按鈕，與顯示結果區域會互相切換 -->
+              <a href="javascript:void(0)" id="get-result" class="get-result"
+                >看結果</a
+              >
+            </div>
           </div>
         </div>
-      </div>
-    </header>
-    <main>
-      <div class="container">
-        <h2>BMI 紀錄</h2>
-        <!-- 歷史紀錄的容器 -->
-        <ul id="bmi-history" class="bmi-history"></ul>
-        <button id="clear" class="btn-clear">清除歷史</button>
-      </div>
-    </main>
+      </header>
+      <main>
+        <div class="container">
+          <h2>BMI 紀錄</h2>
+          <!-- 歷史紀錄的容器 -->
+          <ul id="bmi-history" class="bmi-history"></ul>
+          <button id="clear" class="btn-clear">清除歷史</button>
+        </div>
+      </main>
+    </div>
     <footer>
       <h2><a href="#">BMI Calculator</a></h2>
     </footer>

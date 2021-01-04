@@ -142,6 +142,10 @@ body {
   margin: 0 auto;
 }
 
+.wrapper {
+  min-height: calc(100vh - 91px);
+}
+
 /* 頁首 header */
 header {
   background: #424242;
@@ -381,6 +385,7 @@ header .summary.hidden {
   header .flex-inner:nth-child(2) {
     flex-basis: 60%;
     max-width: none;
+    margin-bottom: 15px;
   }
 
   header .flex-inner:last-child {
@@ -391,11 +396,19 @@ header .summary.hidden {
   header h1 a {
     margin: 0 auto;
   }
-}
 
-@media (max-width: 575px) {
+  header .result-wrapper {
+    align-self: start;
+    margin-bottom: 25px;
+  }
+
   .summary .status-title {
-    right: -3px;
+    position: relative;
+    text-align: center;
+    transform: none;
+    margin-top: 5px;
+    top: 0;
+    right: 0;
   }
 }
 
