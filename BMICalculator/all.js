@@ -1,6 +1,7 @@
 // 處理 local storage 的讀取
 class Storage {
   constructor() {
+    this.data = [];
     this.loadData();
   }
   // 讀取 local storage 的歷史資料
@@ -15,8 +16,13 @@ class Storage {
   }
   // 儲存資料
   storeData(newData) {
-    this.data.unshift(newData);
+    if (newData) this.data.unshift(newData);
     localStorage.setItem('bmiData', JSON.stringify(this.data));
+  }
+  deleteOneRecord(id) {
+    const index = this.data.findIndex((o) => o.id === id);
+    this.data.splice(index, 1);
+    this.storeData();
   }
   // 清除所有資料
   clearData() {
@@ -65,7 +71,9 @@ class UI {
     const today = Utils.getToday();
     const weight = this.weight.value;
     const height = this.height.value;
+    const id = Date.now();
     const bmiData = {
+      id,
       bmi,
       statusZh,
       statusEn,
@@ -87,17 +95,36 @@ class UI {
   // 歷史紀錄樣板，如果沒有 class 沒有加上 show 會先隱藏
   getTemplate(bmiData, isOld) {
     const show = isOld ? 'show ' : '';
-    return `<li class="${show}${bmiData.statusEn}">
+    return `<li class="${show}${bmiData.statusEn}" data-id="${bmiData.id}">
               <div class="cell status">${bmiData.statusZh}</div> 
               <div class="cell bmi"><small>BMI</small>&nbsp;${bmiData.bmi}</div> 
               <div class="cell weight"><small>weight</small>&nbsp;${bmiData.weight}</div> 
               <div class="cell height"><small>height</small>&nbsp;${bmiData.height}</div> 
               <div class="cell date"><small>${bmiData.today}</small></div> 
+              <div class="delete-icon">
+                <i class="fas fa-times-circle"></i>
+              </div>
             </li>`;
   }
   // 處理當按下要看結果的按鈕的事件
   addGetResultEvent(handler) {
     this.getResult.addEventListener('click', handler);
+  }
+  // 處理按下 delete button 的事件
+  addDeleteOneRecodEvent(storage) {
+    this.bmiHistory.addEventListener('click', (e) => {
+      if (e.target.nodeName.toUpperCase() !== 'I') return;
+      const li = e.target.parentElement.parentElement;
+      const id = parseInt(li.dataset.id);
+      this.fadeOut(
+        li,
+        () => {
+          li.remove();
+          storage.deleteOneRecord(id);
+        },
+        id
+      );
+    });
   }
   // 處理當按下要清除歷史紀錄的按鈕的事件
   addClearHistoryEvent(storage) {
@@ -123,12 +150,13 @@ class UI {
     });
   }
   // 淡出特效
-  fadeOut(el) {
+  fadeOut(el, deleteFunc) {
     el.classList.add('hidden');
     el.addEventListener(
       'transitionend',
       function () {
         el.style.visibility = 'hidden';
+        if (typeof deleteFunc === 'function') deleteFunc();
       },
       { once: true }
     );
@@ -207,6 +235,7 @@ function init() {
 
   // 顯示過去的 BMI 歷史資料
   ui.showOldData(storage.getDate());
+  ui.addDeleteOneRecodEvent(storage);
   // 當使用者按下「看結果」的按鈕，處理使用者的身高體重數據
   ui.addGetResultEvent(function () {
     const { weight, height } = ui.getUserData();

@@ -406,6 +406,7 @@ header .summary.hidden {
   .summary .status-title {
     position: relative;
     text-align: center;
+    white-space: nowrap;
     transform: none;
     margin-top: 5px;
     top: 0;
@@ -443,7 +444,10 @@ main .bmi-history {
   background: #fff;
   opacity: 0;
   height: 0;
+  max-height: 500px;
+  overflow: hidden;
   transform: rotateX(-90deg);
+  position: relative;
   transition: all 0.5s cubic-bezier(0.36, -0.64, 0.34, 1.76);
 }
 
@@ -452,6 +456,11 @@ main .bmi-history {
   height: 100%;
   transform: none;
   transition: all 0.5s cubic-bezier(0.36, -0.64, 0.34, 1.76);
+}
+
+.bmi-history > li.hidden {
+  max-height: 0px;
+  transition-duration: 1s;
 }
 
 .bmi-history > .ideal {
@@ -481,20 +490,31 @@ main .bmi-history {
 .bmi-history .cell {
   display: inline-flex;
   align-items: center;
-  width: 20%;
+  width: 19%;
   padding: 20px 0;
 }
 
 .bmi-history li .status {
-  width: 23%;
+  width: 21%;
   font-size: 24px;
   padding-left: 12px;
 }
 
 .bmi-history li .date {
   width: 17%;
-  justify-content: flex-end;
-  padding-right: 12px;
+  justify-content: center;
+}
+
+.bmi-history li .delete-icon {
+  width: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.bmi-history li .fa-times-circle {
+  color: #f22;
 }
 
 .bmi-history .cell small {
@@ -543,8 +563,8 @@ main .btn-clear:active {
   }
 
   .bmi-history li .date {
-    width: 100%;
-    justify-content: center;
+    width: 95%;
+    text-align: center;
   }
 }
 
@@ -560,10 +580,12 @@ main .btn-clear:active {
 
   .bmi-history li .status {
     width: 100%;
+    padding-left: 0;
   }
 
   .bmi-history li .date {
-    width: 100%;
+    width: 95%;
+    padding-left: 5%;
   }
 }
 

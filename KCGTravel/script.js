@@ -1,18 +1,18 @@
-var data;
-var defaultZone = '三民區';
-var selectedZoneName = defaultZone;
-var selectedData = { data: [] }; // 使用者選取的行政區資料
-var selectedDataProxy; // 使用者選取的行政區資料 proxy
+let data;
+let selectedData = { data: [] }; // 使用者選取的行政區資料
+let selectedDataProxy; // 使用者選取的行政區資料 proxy
+const defaultZone = '苓雅區';
+let selectedZoneName = defaultZone;
 
 function init() {
-  var select = document.querySelector('select'); // 行政區下拉清單
-  var hotDistrict = document.querySelector('.hot-district'); // 熱門行政區清單
+  const select = document.querySelector('select'); // 行政區下拉清單
+  const hotDistrict = document.querySelector('.hot-district'); // 熱門行政區清單
 
   // AJAX　取得資料
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      var rawData = JSON.parse(xhr.responseText);
+      const rawData = JSON.parse(xhr.responseText);
       if (rawData.success) {
         data = rawData.result.records;
 
@@ -56,7 +56,7 @@ function filterData(selectedZone) {
 
 // 取得指定元素的 y 軸座標
 function getYPosition(element) {
-  var y = 0;
+  let y = 0;
   while (element) {
     y += element.offsetTop - element.scrollTop; // + element.clientTop;
     element = element.offsetParent;
@@ -66,7 +66,7 @@ function getYPosition(element) {
 }
 
 // 所有事件的處理函式
-var eventHandler = {
+const eventHandler = {
   offset: getYPosition(document.getElementById('dashed-line')) - 15,
 
   scrollTo: function (top) {
@@ -79,7 +79,7 @@ var eventHandler = {
 
   selectChange: function (e) {
     e.preventDefault();
-    var selectedZone = e.target.value;
+    const selectedZone = e.target.value;
     selectedZoneName = selectedZone;
     selectedDataProxy.data = filterData(selectedZone);
     eventHandler.scrollTo(eventHandler.offset);
@@ -90,7 +90,7 @@ var eventHandler = {
     if (e.target.nodeName !== 'A') {
       return;
     }
-    var selectedZone = e.target.dataset.value;
+    const selectedZone = e.target.dataset.value;
     selectedZoneName = selectedZone;
     selectedDataProxy.data = filterData(selectedZone);
     eventHandler.scrollTo(eventHandler.offset);
@@ -117,7 +117,7 @@ var eventHandler = {
 };
 
 // 處理旅遊景點卡片與分頁的渲染器
-var renderer = {
+const renderer = {
   _pageNumber: 1, // 總頁數
   _currentPage: 1, // 目前頁面是第幾頁
   _cardNumberPerPage: 4, // 一個頁面的卡片數量
@@ -133,7 +133,7 @@ var renderer = {
   init: function (data) {
     this._dataArray = [];
 
-    var index = 0;
+    let index = 0;
     while (index < data.length) {
       this._dataArray.push(data.slice(index, index + this._cardNumberPerPage));
       index += this._cardNumberPerPage;
@@ -161,23 +161,23 @@ var renderer = {
     this._cardsRenderArea.textContent = '';
 
     // 建立 DOM fragment並插入h2與卡片容器
-    var fragment = document.createDocumentFragment();
-    var h2 = document.createElement('h2');
-    var cardList = document.createElement('div');
+    const fragment = document.createDocumentFragment();
+    const h2 = document.createElement('h2');
+    const cardList = document.createElement('div');
     cardList.className = 'card-list';
     h2.textContent = selectedZoneName;
     fragment.appendChild(h2);
     fragment.appendChild(cardList);
 
-    var c = this._cardTemplate;
-    var dataIndex = this._currentPage - 1;
-    var data = this._dataArray[dataIndex];
+    const c = this._cardTemplate;
+    const dataIndex = this._currentPage - 1;
+    let data = this._dataArray[dataIndex];
     data = Array.isArray(data) ? data : []; // 排除 data 為 undefined 的情況
 
     // 如果選擇的區域有資料就複製 template 並帶入相應的資料
     if (data.length > 0) {
       data.forEach((el) => {
-        var clone = document.importNode(c.content, true);
+        const clone = document.importNode(c.content, true);
         clone.getElementById('card-img').src = el.Picture1;
         clone.getElementById('card-title').textContent = el.Name;
         clone.getElementById('card-subtitle').textContent = el.Zone;
@@ -203,11 +203,11 @@ var renderer = {
 
   // 渲染分頁功能
   _drawPagination: function () {
-    var p = this._paginationTemplate;
-    var clone = document.importNode(p.content, true);
-    var len = this._pageNumber;
-    var pre = clone.getElementById('page-prev');
-    var next = clone.getElementById('page-next');
+    const p = this._paginationTemplate;
+    const clone = document.importNode(p.content, true);
+    const len = this._pageNumber;
+    let pre = clone.getElementById('page-prev');
+    const next = clone.getElementById('page-next');
 
     // 根據目前是第幾頁決定分頁元件的上下頁按鈕是否保留功能
     this._checkPaginationDisabled(pre, next);
@@ -241,17 +241,17 @@ var renderer = {
 
   // 重新繪製分頁功能
   _redrawPagination: function () {
-    var pagination = document.getElementsByClassName('pagination')[0];
-    var pageLinks = pagination.getElementsByClassName('page-link');
-    var len = this._pageNumber;
-    var pre = document.getElementById('page-prev');
-    var next = document.getElementById('page-next');
+    const pagination = document.getElementsByClassName('pagination')[0];
+    const pageLinks = pagination.getElementsByClassName('page-link');
+    const len = this._pageNumber;
+    const pre = document.getElementById('page-prev');
+    const next = document.getElementById('page-next');
 
     // 判斷決定 pre 跟 next button 是不是處於 disabled 狀態
     this._checkPaginationDisabled(pre, next);
 
     // 讓目前頁按鈕加上 active class
-    for (var i = 0; i < len; i++) {
+    for (let i = 0; i < len; i++) {
       pageLinks[i].classList.remove('active');
       if (this._currentPage === i + 1) pageLinks[i].classList.add('active');
     }
