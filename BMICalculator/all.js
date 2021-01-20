@@ -19,6 +19,7 @@ class Storage {
     if (newData) this.data.unshift(newData);
     localStorage.setItem('bmiData', JSON.stringify(this.data));
   }
+  // 刪除一筆紀錄
   deleteOneRecord(id) {
     const index = this.data.findIndex((o) => o.id === id);
     this.data.splice(index, 1);
@@ -63,8 +64,8 @@ class UI {
     this.summary.querySelector('.status-title').textContent = `${statusZh}`;
 
     // 切換顯示結果
-    this.fadeIn(this.summary);
-    this.fadeOut(this.getResult);
+    this.animateIn(this.summary);
+    this.animateOut(this.getResult);
     this.refresh.setAttribute('tabindex', '0');
 
     // 取得要渲染到歷史紀錄的資料並且套用模板顯示在畫面上
@@ -115,15 +116,12 @@ class UI {
     this.bmiHistory.addEventListener('click', (e) => {
       if (e.target.nodeName.toUpperCase() !== 'I') return;
       const li = e.target.parentElement.parentElement;
+      // 取得 li 元素上榜定的資料 id
       const id = parseInt(li.dataset.id);
-      this.fadeOut(
-        li,
-        () => {
-          li.remove();
-          storage.deleteOneRecord(id);
-        },
-        id
-      );
+      this.animateOut(li, () => {
+        li.remove();
+        storage.deleteOneRecord(id);
+      });
     });
   }
   // 處理當按下要清除歷史紀錄的按鈕的事件
@@ -136,8 +134,8 @@ class UI {
   // 處理當按下要從結果返回的按鈕的事件
   addRefreshEvent() {
     const handler = () => {
-      this.fadeOut(this.summary);
-      this.fadeIn(this.getResult);
+      this.animateOut(this.summary);
+      this.animateIn(this.getResult);
       this.refresh.setAttribute('tabindex', '-1');
       this.height.value = '';
       this.weight.value = '';
@@ -149,8 +147,8 @@ class UI {
       }
     });
   }
-  // 淡出特效
-  fadeOut(el, deleteFunc) {
+  // 退場特效
+  animateOut(el, deleteFunc) {
     el.classList.add('hidden');
     el.addEventListener(
       'transitionend',
@@ -161,8 +159,8 @@ class UI {
       { once: true }
     );
   }
-  // 淡入特效
-  fadeIn(el) {
+  // 進場特效
+  animateIn(el) {
     el.style.visibility = 'visible';
     el.classList.remove('hidden');
   }
@@ -235,6 +233,7 @@ function init() {
 
   // 顯示過去的 BMI 歷史資料
   ui.showOldData(storage.getDate());
+  // 加入當使用者按下其中一筆紀錄上的 X 按鈕的刪除事件
   ui.addDeleteOneRecodEvent(storage);
   // 當使用者按下「看結果」的按鈕，處理使用者的身高體重數據
   ui.addGetResultEvent(function () {

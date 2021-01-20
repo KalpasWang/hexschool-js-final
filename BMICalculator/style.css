@@ -437,54 +437,68 @@ main .bmi-history {
 
 .bmi-history > li {
   display: flex;
-  border-left-width: 7px;
-  border-left-style: solid;
-  margin-bottom: 16px;
+  border-bottom-width: 16px;
+  border-bottom-color: #f5f5f5;
+  border-bottom-style: solid;
+  margin: 0;
   font-size: 20px;
   background: #fff;
   opacity: 0;
   height: 0;
-  max-height: 500px;
+  max-height: 200px;
   overflow: hidden;
   transform: rotateX(-90deg);
   position: relative;
-  transition: all 0.5s cubic-bezier(0.36, -0.64, 0.34, 1.76);
+  transition: all 1s cubic-bezier(0.36, -0.64, 0.34, 1.76);
+}
+
+.bmi-history > li::before {
+  content: ' ';
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 7px;
+  background: #aaa;
+  height: 100%;
 }
 
 .bmi-history > li.show {
   opacity: 1;
   height: 100%;
   transform: none;
-  transition: all 0.5s cubic-bezier(0.36, -0.64, 0.34, 1.76);
+  transition: all 1s cubic-bezier(0.36, -0.64, 0.34, 1.76);
 }
 
 .bmi-history > li.hidden {
   max-height: 0px;
   transition-duration: 1s;
+  transition-timing-function: linear;
 }
 
-.bmi-history > .ideal {
-  border-left-color: #86d73f;
+.bmi-history > .ideal::before {
+  background: #86d73f;
 }
 
-.bmi-history > .underweight {
-  border-left-color: #31baf9;
+.bmi-history > .underweight::before {
+  background: #31baf9;
 }
 
-.bmi-history > .overweight {
-  border-left-color: #ff982d;
+.bmi-history > .overweight::before {
+  background: #ff982d;
 }
 
-.bmi-history > .obeseClass1 {
-  border-left-color: #ff6c03;
+.bmi-history > .obeseClass1::before {
+  background: #ff6c03;
 }
 
-.bmi-history > .obeseClass2 {
-  border-left-color: #ff6c03;
+.bmi-history > .obeseClass2::before {
+  background: #ff6c03;
 }
 
-.bmi-history > .obeseClass3 {
-  border-left-color: #ff1200;
+.bmi-history > .obeseClass3::before {
+  background: #ff1200;
 }
 
 .bmi-history .cell {
@@ -497,7 +511,7 @@ main .bmi-history {
 .bmi-history li .status {
   width: 21%;
   font-size: 24px;
-  padding-left: 12px;
+  padding-left: 17px;
 }
 
 .bmi-history li .date {
@@ -506,11 +520,12 @@ main .bmi-history {
 }
 
 .bmi-history li .delete-icon {
-  width: 5%;
+  width: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  overflow: visible;
 }
 
 .bmi-history li .fa-times-circle {
@@ -563,8 +578,9 @@ main .btn-clear:active {
   }
 
   .bmi-history li .date {
-    width: 95%;
+    width: 90%;
     text-align: center;
+    padding-left: 10%;
   }
 }
 
@@ -584,8 +600,7 @@ main .btn-clear:active {
   }
 
   .bmi-history li .date {
-    width: 95%;
-    padding-left: 5%;
+    width: 90%;
   }
 }
 
