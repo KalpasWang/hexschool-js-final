@@ -9,7 +9,7 @@ function init() {
   const hotDistrict = document.querySelector('.hot-district'); // 熱門行政區清單
 
   // AJAX　取得資料
-  var xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       const rawData = JSON.parse(xhr.responseText);
@@ -216,7 +216,7 @@ const renderer = {
     next.firstChild.addEventListener('click', eventHandler.nextPage);
 
     // 依照頁數依序插入按鈕
-    for (var i = 1; i <= len; i++) {
+    for (let i = 1; i <= len; i++) {
       if (i === this._currentPage)
         pre.insertAdjacentHTML(
           'afterend',
